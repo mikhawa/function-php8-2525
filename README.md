@@ -1,5 +1,8 @@
 # function-php8-2025
 
+
+## DB MariaDB utf8mb4_general_ci
+
 Pour mettre à jour la version de MariaDB en `utf8mb4_general_ci`, il faut d'abord arrêter le service MariaDB et ajouter dans son fichier de configuration `my.ini` les lignes suivantes :
 
 ```bash
@@ -14,3 +17,4 @@ Ensuite, on redémarre le service MariaDB et crée la base de données pour vér
 ```bash
 php bin/console doctrine:database:create
 ```
+
