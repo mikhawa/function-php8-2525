@@ -7,7 +7,7 @@ name: Symfony
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "structureDB" ]
   pull_request:
     branches: [ "main" ]
 
