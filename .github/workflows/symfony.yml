@@ -17,10 +17,10 @@ jobs:
         image: mariadb:11
         options: --health-cmd "mysqladmin ping --silent" --health-interval 10s --health-timeout 5s --health-retries 3
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: ''
           MYSQL_DATABASE: fphp8
         ports:
-          - 3306:3306
+          - 3307:3307
     steps:
       - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
         with:
