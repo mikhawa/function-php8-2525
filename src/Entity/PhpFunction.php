@@ -6,8 +6,9 @@ namespace App\Entity;
 use App\Repository\PhpFunctionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-# DateTimeInterface
+# Timestampable
 use DateTimeInterface;
+
 
 #[ORM\Entity(repositoryClass: PhpFunctionRepository::class)]
 class PhpFunction
@@ -52,9 +53,8 @@ class PhpFunction
         nullable: true,
         options: [
             'insertable' => false,
-            'updateable' => false,
+            'updateable' => true,
         ],
-        columnDefinition: 'TIMESTAMP on update CURRENT_TIMESTAMP'
     )]
     private ?DateTimeInterface $updatedAt = null;
 
@@ -142,6 +142,10 @@ class PhpFunction
 
     public function setUpdatedAt(?DateTimeInterface $updateAt): static
     {
+        if(is_null($updateAt)){
+            $updateAt = new DateTime();
+
+        }
         $this->updatedAt = $updateAt;
 
         return $this;

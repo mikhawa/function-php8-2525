@@ -140,16 +140,15 @@ Pour avoir la date courante par défaut et ne pas pouvoir l'insérer côté Symf
 /*
 #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
-Pour mettre à jour la date courante à chaque modification sans passer par Symfony :
+Pour mettre à jour la date courante à chaque modification en passant par Symfony :
  */
 #[ORM\Column(
         type: Types::DATETIME_MUTABLE, 
         nullable: true,
         options: [
             'insertable' => false,
-            'updateable' => false,
-        ],
-        columnDefinition: 'TIMESTAMP on update CURRENT_TIMESTAMP'
+            'updateable' => true,
+        ]
     )]
     private ?DateTimeInterface $updatedAt = null;
 ```
@@ -158,4 +157,10 @@ Préparation de la migration :
 
 ```bash
 php bin/console make:migration
+```
+suivi de la migration :
+
+```bash
+php bin/console doctrine:migrations:migrate
+> yes
 ```
