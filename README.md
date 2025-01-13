@@ -178,3 +178,6 @@ Vérification des tests unitaires :
 ```bash
 vendor/bin/phpunit --testdox tests/Entity/PhpFunctionTest.php
 ```
+
+Pour le moment, nous vérifions que l'entité `PhpFunction` est bien instanciée.
+
