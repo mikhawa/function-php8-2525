@@ -1,17 +1,23 @@
 <?php
+# src/Entity/PhpFunction.php
 
 namespace App\Entity;
 
 use App\Repository\PhpFunctionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+# DateTimeInterface
+use DateTimeInterface;
 
 #[ORM\Entity(repositoryClass: PhpFunctionRepository::class)]
 class PhpFunction
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(
+        type: Types::INTEGER,
+        options: ['unsigned' => true]
+    )]
     private ?int $id = null;
 
     #[ORM\Column(length: 120)]
@@ -26,14 +32,31 @@ class PhpFunction
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
-    #[ORM\Column]
+    #[ORM\Column(
+        type: Types::BOOLEAN,
+        options: ['default' => true]
+    )]
     private ?bool $visibility = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(
+        type: Types::DATETIME_MUTABLE,
+        options: [
+            'default' => 'CURRENT_TIMESTAMP',
+            'insertable' => false
+        ]
+    )]
+    private ?DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
+    #[ORM\Column(
+        type: Types::DATETIME_MUTABLE,
+        nullable: true,
+        options: [
+            'insertable' => false,
+            'updateable' => false,
+        ],
+        columnDefinition: 'TIMESTAMP on update CURRENT_TIMESTAMP'
+    )]
+    private ?DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -100,26 +123,26 @@ class PhpFunction
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt(DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->updateAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdateAt(?\DateTimeInterface $updateAt): static
+    public function setUpdatedAt(?DateTimeInterface $updateAt): static
     {
-        $this->updateAt = $updateAt;
+        $this->updatedAt = $updateAt;
 
         return $this;
     }

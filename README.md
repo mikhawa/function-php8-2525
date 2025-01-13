@@ -112,7 +112,46 @@ transformation en unsigned :
     )]
     private ?int $id = null;
 # ...
-
+/*
+#[ORM\Column()]
+    private ?bool $visibility = null;
+Pour avoir true par défaut :
+ */
+#[ORM\Column(
+        type: Types::BOOLEAN,
+        options: ['default' => true]
+    )]
+    private ?bool $visibility = null;
+# ...
+/*
+#[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?DateTimeInterface $createdAt = null;
+Pour avoir la date courante par défaut et ne pas pouvoir l'insérer côté Symfony :
+ */
+#[ORM\Column(
+        type: Types::DATETIME_MUTABLE,
+        options: [
+            'default' => 'CURRENT_TIMESTAMP',
+            'insertable' => false
+        ]
+    )]
+    private ?DateTimeInterface $createdAt = null;
+# ...
+/*
+#[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
+Pour mettre à jour la date courante à chaque modification sans passer par Symfony :
+ */
+#[ORM\Column(
+        type: Types::DATETIME_MUTABLE, 
+        nullable: true,
+        options: [
+            'insertable' => false,
+            'updateable' => false,
+        ],
+        columnDefinition: 'TIMESTAMP on update CURRENT_TIMESTAMP'
+    )]
+    private ?DateTimeInterface $updatedAt = null;
 ```
 
 Préparation de la migration :
