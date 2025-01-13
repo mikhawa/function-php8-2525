@@ -2,6 +2,14 @@
 
 ## Development
 
+### Date : 2025-01-13
+
+Versions : 
+
+- Symfony 7.2.2
+- PHP 8.3.14
+- MariaDB 11.5.2
+
 ### DB MariaDB utf8mb4_general_ci
 
 Pour mettre à jour la version de **MariaDB** en `utf8mb4_general_ci`, il faut d'abord arrêter le service **MariaDB** et ajouter dans son fichier de configuration `my.ini` les lignes suivantes :
@@ -84,6 +92,26 @@ php bin/console make:entity
 #### Améliorations pour `MariaDB` avant la migration
 
 ```php
+# src/Entity/PhpFunction.php
+# ...
+# DateTimeInterface
+use DateTimeInterface;
+# ...
+/*
+ #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+transformation en unsigned :
+ */
+#[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(
+        type: Types::INTEGER,
+        options: ['unsigned' => true]
+    )]
+    private ?int $id = null;
+# ...
 
 ```
 
