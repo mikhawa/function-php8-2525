@@ -164,3 +164,17 @@ suivi de la migration :
 php bin/console doctrine:migrations:migrate
 > yes
 ```
+
+### Tests unitaires avec `PHPUnit` de `PhpFunction`
+
+Création du dossier `tests/Entity` :
+
+Création du fichier `PhpFunctionTest.php` où seront effectués les tests unitaires :
+
+    tests/Entity/PhpFunctionTest.php
+
+Vérification des tests unitaires :
+
+```bash
+vendor/bin/phpunit --testdox tests/Entity/PhpFunctionTest.php
+```
