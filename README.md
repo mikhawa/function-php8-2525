@@ -181,3 +181,61 @@ vendor/bin/phpunit --testdox tests/Entity/PhpFunctionTest.php
 
 Pour le moment, nous vérifions que l'entité `PhpFunction` est bien instanciée.
 
+#### Création d'un formulaire provisoire pour `PhpFunction`
+
+```bash
+php bin/console make:form
+> PhpFunctionType
+> PhpFunction
+```
+
+Le formulaire est créé dans le dossier `src/Form/PhpFunctionType.php`.
+
+Voici son contenu par défaut :
+
+```php
+<?php
+# src/Form/PhpFunctionType.php
+
+namespace App\Form;
+
+use App\Entity\PhpFunction;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class PhpFunctionType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('title')
+            ->add('slug')
+            ->add('description')
+            ->add('text')
+            ->add('visibility')
+            ->add('createdAt', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('updatedAt', null, [
+                'widget' => 'single_text',
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => PhpFunction::class,
+        ]);
+    }
+}
+```
+
+### Création d'un contrôleur pour `PhpFunction`
+
+```bash
+php bin/console make:controller
+> PhpFunctionController
+> annotation
+```
