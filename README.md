@@ -33,3 +33,10 @@ php bin/console doctrine:database:create
 
 Ce dossier contiendra les données de création de la base de données, ainsi que le template utilisé pour le site.
 
+## Les entités
+
+Elles seront créées dans le dossier `src/Entity` via la commande :
+
+```bash
+php bin/console make:entity
+```
