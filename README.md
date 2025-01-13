@@ -1,10 +1,10 @@
 # function-php8-2025
 
-## Dev
+## Development
 
 ### DB MariaDB utf8mb4_general_ci
 
-Pour mettre à jour la version de MariaDB en `utf8mb4_general_ci`, il faut d'abord arrêter le service MariaDB et ajouter dans son fichier de configuration `my.ini` les lignes suivantes :
+Pour mettre à jour la version de **MariaDB** en `utf8mb4_general_ci`, il faut d'abord arrêter le service **MariaDB** et ajouter dans son fichier de configuration `my.ini` les lignes suivantes :
 
 ```bash
 [mysqld]
@@ -13,7 +13,7 @@ character-set-server=utf8mb4
 collation-server=utf8mb4_general_ci
 ```
 
-Ensuite, on redémarre le service MariaDB.
+Ensuite, on redémarre le service **MariaDB**.
 
 Le fichier `.env.dev` doit être mis à jour avec le port de MariaDB :
 
@@ -39,4 +39,56 @@ Elles seront créées dans le dossier `src/Entity` via la commande :
 
 ```bash
 php bin/console make:entity
+```
+
+### Entité `PhpFunction`
+
+```bash
+php bin/console make:entity 
+> PhpFunction
+> no
+
+> title
+> string
+> 120
+> no
+
+> slug
+> string
+> 125
+> no
+
+> description
+> string
+> 255
+> no
+
+> text
+> text
+> no
+
+> visibility
+> boolean
+> no
+
+> createdAt
+> datetime
+> no
+
+> updatedAt
+> datetime
+> yes
+
+```
+
+#### Améliorations pour `MariaDB` avant la migration
+
+```php
+
+```
+
+Préparation de la migration :
+
+```bash
+php bin/console make:migration
 ```
