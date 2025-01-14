@@ -232,10 +232,41 @@ class PhpFunctionType extends AbstractType
 }
 ```
 
-### Création d'un contrôleur pour `PhpFunction`
+### Création d'un contrôleur pour `Homepage`
 
 ```bash
 php bin/console make:controller
-> PhpFunctionController
-> annotation
+> HomepageController
+> PHPUnit tests? yes
+```
+
+3 fichiers sont créés :
+
+on modifie le fichier `src/Controller/HomepageController.php` :
+
+```php
+# src/Controller/HomepageController.php
+#...
+#[Route('/', name: 'homepage')]
+    public function index(): Response
+    {
+        return $this->render('homepage/index.html.twig', [
+            'controller_name' => 'HomepageController',
+        ]);
+    }
+#...
+```
+
+et son test unitaire `tests/Controller/HomepageControllerTest.php` :
+
+```php
+# tests/Controller/HomepageControllerTest.php
+#...
+    public function testSomething(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        self::assertResponseIsSuccessful();
+    }
+#...
 ```
