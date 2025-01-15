@@ -142,10 +142,7 @@ class PhpFunction
 
     public function setUpdatedAt(?DateTimeInterface $updateAt): static
     {
-        if(is_null($updateAt)){
-            $updateAt = new DateTime();
 
-        }
         $this->updatedAt = $updateAt;
 
         return $this;

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PhpFunction{% endblock %}
+
+{% block body %}
+    <h1>Edit PhpFunction</h1>
+
+    {{ include('php_function/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_php_function_index') }}">back to list</a>
+
+    {{ include('php_function/_delete_form.html.twig') }}
+{% endblock %}

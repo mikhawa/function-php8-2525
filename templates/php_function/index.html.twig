@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PhpFunction index{% endblock %}
+
+{% block body %}
+    <h1>PhpFunction index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Description</th>
+                <th>Text</th>
+                <th>Visibility</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for php_function in php_functions %}
+            <tr>
+                <td>{{ php_function.id }}</td>
+                <td>{{ php_function.title }}</td>
+                <td>{{ php_function.slug }}</td>
+                <td>{{ php_function.description }}</td>
+                <td>{{ php_function.text }}</td>
+                <td>{{ php_function.visibility ? 'Yes' : 'No' }}</td>
+                <td>{{ php_function.createdAt ? php_function.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ php_function.updatedAt ? php_function.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_php_function_show', {'id': php_function.id}) }}">show</a>
+                    <a href="{{ path('app_php_function_edit', {'id': php_function.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_php_function_new') }}">Create new</a>
+{% endblock %}
