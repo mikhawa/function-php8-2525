@@ -270,3 +270,22 @@ et son test unitaire `tests/Controller/HomepageControllerTest.php` :
     }
 #...
 ```
+## Création du `User`
+
+```bash
+php bin/console make:user
+> User
+> username
+> email
+> password
+> ROLE_USER
+```
+
+
+## chargement de esayadmin
+
+```bash
+composer require easycorp/easyadmin-bundle
+```
+
+```bash
