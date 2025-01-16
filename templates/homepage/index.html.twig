@@ -1,20 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'mytemplate.html.twig' %}
 
-{% block title %}Hello HomepageController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>E:/SITES/2025/function-php8/src/Controller/HomepageController.php</code></li>
-        <li>Your template at <code>E:/SITES/2025/function-php8/templates/homepage/index.html.twig</code></li>
-    </ul>
-</div>
+{% block menudroite %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liste</a>
+        <div class="dropdown-menu scrollable-menu" aria-labelledby="dropdownThemes">
+            <a class="dropdown-item js-scroll-trigger" href="#contenu">Haut de page</a>
+            {% for item in liste %}
+                <a class="dropdown-item js-scroll-trigger" href="#link{{ item.id }}">{{ item.title }}</a>
+            {% else %}
+                Pas encore de fonctions PHP
+            {% endfor %}
+        </div>
+    </li>
+    <li class="nav-item">{% if is_granted('ROLE_ADMIN') %}<a class="nav-link js-scroll-trigger" href="{{  path('app_logout') }}">Déconnexion</a>{% else %}<a class="nav-link js-scroll-trigger" href="{{  path('app_login') }}">Connexion</a>{% endif %}</li>
 {% endblock %}
+{% block stitre %}{{ parent() }}<hr>{% for item in liste %}<a class="js-scroll-trigger" title="{{ item.title }} | {{ item.description }}" href="#link{{ item.id }}">{{ item.title }}</a>{% if not loop.last %} | {% endif %}
+{% else %}
+    Pas encore de fonctions PHP
+{% endfor %}{% endblock %}
+{% block contenu %}
+    {% for item in liste %}
+        <hr id="link{{ item.id }}"><br>
+        <h3 title="{{ item.description }}">{{ item.title }}</h3>
+        <p class="lead">{{ item.text }}</p>
+        <p><a class="btn btn-dark" data-toggle="collapse" href="#collapse{{ item.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ item.id }}" onClick = "this.style.display= 'none';">Lire la suite</a></p>
+        <div class="collapse" id="collapse{{ item.id }}">
+            <p>{{ item.text|raw  }}</p>
+            <h6>Liens externes</h6>
+            <ul>{% for link in item.Link %}
+                    <li><a href="{{ link.url }}" title="{{ link.description }}" rel="nofollow" target="_blank">{{ link.title }}</a> - {{ link.description }}</li>
+                {% else %}
+                    <li>Pas de liens</li>
+                {% endfor %}</ul>
+        </div>
+    {% else %}
+        <h3>Pas encore de fonctions</h3>
+    {% endfor %}
+{% endblock %}
+
