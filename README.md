@@ -302,3 +302,6 @@ php bin/console make:security:form-login
 php bin/console security:hash-password
 ```
 
+## DB fphp
+
+![DB fphp](datas/fphp8.png)
