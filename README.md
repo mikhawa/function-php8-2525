@@ -289,3 +289,16 @@ composer require easycorp/easyadmin-bundle
 ```
 
 ```bash
+php bin/console make:admin:dashboard
+```
+
+## Création de login
+
+```bash
+php bin/console make:security:form-login 
+```
+
+```bash
+php bin/console security:hash-password
+```
+
