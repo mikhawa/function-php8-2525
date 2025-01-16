@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 use App\Repository\PhpFunctionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 # Timestamp
@@ -60,6 +62,17 @@ class PhpFunction
 
     #[ORM\ManyToOne(inversedBy: 'phpFunctions')]
     private ?User $idUser = null;
+
+    /**
+     * @var Collection<int, LinkPhp>
+     */
+    #[ORM\ManyToMany(targetEntity: LinkPhp::class, inversedBy: 'phpFunctions')]
+    private Collection $Link;
+
+    public function __construct()
+    {
+        $this->Link = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -159,6 +172,30 @@ class PhpFunction
     public function setIdUser(?User $idUser): static
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LinkPhp>
+     */
+    public function getLink(): Collection
+    {
+        return $this->Link;
+    }
+
+    public function addLink(LinkPhp $link): static
+    {
+        if (!$this->Link->contains($link)) {
+            $this->Link->add($link);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(LinkPhp $link): static
+    {
+        $this->Link->removeElement($link);
 
         return $this;
     }
