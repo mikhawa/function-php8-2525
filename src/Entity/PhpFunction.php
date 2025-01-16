@@ -58,6 +58,9 @@ class PhpFunction
     )]
     private ?DateTimeInterface $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'phpFunctions')]
+    private ?User $idUser = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +147,18 @@ class PhpFunction
     {
 
         $this->updatedAt = $updateAt;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): static
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, PhpFunction>
+     */
+    #[ORM\OneToMany(targetEntity: PhpFunction::class, mappedBy: 'idUser')]
+    private Collection $phpFunctions;
+
+    public function __construct()
+    {
+        $this->phpFunctions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,6 +130,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PhpFunction>
+     */
+    public function getPhpFunctions(): Collection
+    {
+        return $this->phpFunctions;
+    }
+
+    public function addPhpFunction(PhpFunction $phpFunction): static
+    {
+        if (!$this->phpFunctions->contains($phpFunction)) {
+            $this->phpFunctions->add($phpFunction);
+            $phpFunction->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhpFunction(PhpFunction $phpFunction): static
+    {
+        if ($this->phpFunctions->removeElement($phpFunction)) {
+            // set the owning side to null (unless already changed)
+            if ($phpFunction->getIdUser() === $this) {
+                $phpFunction->setIdUser(null);
+            }
+        }
 
         return $this;
     }
