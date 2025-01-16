@@ -1,12 +1,13 @@
-{% extends 'mytemplate.html.twig' %}
+{# templates/admin/admin.homepage.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 {% block title %}Listphp.webdev-cf2m.be | Administration{% endblock %}
 {% block menudroite %}
     <li class="nav-item">
         <a class="nav-link js-scroll-trigger" href="{{  path('admin') }}">Accueil Admin</a>
     </li>
-   {#  <li class="nav-item">
-        <a class="nav-link js-scroll-trigger" href="{{  path('listephp_index') }}">fonctions PHP</a>
-    </li>
+     <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{  path('PhpFunction_index') }}">fonctions PHP</a>
+    </li>{#
     <li class="nav-item">
         <a class="nav-link js-scroll-trigger" href="{{  path('linkphp_index') }}">Liens sources externes</a>
     </li>
