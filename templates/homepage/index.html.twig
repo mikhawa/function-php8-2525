@@ -22,10 +22,10 @@
     {% for item in liste %}
         <hr id="link{{ item.id }}"><br>
         <h3 title="{{ item.description }}">{{ item.title }}</h3>
-        <p class="lead">{{ item.text }}</p>
+        <p class="lead">{{ item.description }}</p>
         <p><a class="btn btn-dark" data-toggle="collapse" href="#collapse{{ item.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ item.id }}" onClick = "this.style.display= 'none';">Lire la suite</a></p>
         <div class="collapse" id="collapse{{ item.id }}">
-            <p>{{ item.text|raw  }}</p>
+            <p>{{ item.text  }}</p>
             <h6>Liens externes</h6>
             <ul>{% for link in item.Link %}
                     <li><a href="{{ link.url }}" title="{{ link.description }}" rel="nofollow" target="_blank">{{ link.title }}</a> - {{ link.description }}</li>
