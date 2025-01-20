@@ -2,13 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\LinkPhp;
 use App\Entity\PhpFunction;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 class PhpFunctionCrudController extends AbstractCrudController
 {
@@ -38,6 +41,11 @@ class PhpFunctionCrudController extends AbstractCrudController
             TextField::new('slug'),
             TextField::new('description'),
             TextEditorField::new('text'),
+            AssociationField::new('Link')->setFormTypeOptions([
+                'by_reference' => false, // Important pour les relations Many-to-Many
+            ]),
+            BooleanField::new('visibility')->setValue(true),
+            DateTimeField::new('createdAt')->setValue(new \DateTime()),
 
         ];
     }
