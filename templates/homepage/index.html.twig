@@ -28,7 +28,7 @@
             <p>{{ item.text|raw  }}</p>
             <h6>Liens externes</h6>
             <ul>{% for link in item.Link %}
-                    <li><a href="{{ link.url }}" title="{{ link.description }}" rel="nofollow" target="_blank">{{ link.title }}</a> - {{ link.description }}</li>
+                    <li><a href="{{ link.url }}" title="{{ link.description }}" rel="nofollow" target="_blank">{{ link.title }}</a> - {{ link.description|raw }}</li>
                 {% else %}
                     <li>Pas de liens</li>
                 {% endfor %}</ul>
