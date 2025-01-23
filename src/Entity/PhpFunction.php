@@ -144,8 +144,11 @@ class PhpFunction
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): static
+    public function setCreatedAt(?DateTimeInterface $createdAt): static
     {
+        if($createdAt === null){
+            $createdAt = new \DateTime();
+        }
         $this->createdAt = $createdAt;
 
         return $this;

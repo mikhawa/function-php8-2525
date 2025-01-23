@@ -1,0 +1,26 @@
+{# templates/admin/admin.homepage.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+{% block title %}Listphp.webdev-cf2m.be | Administration{% endblock %}
+{% block menudroite %}
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{  path('admin') }}">Accueil Admin</a>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{  path('PhpFunction_index') }}">fonctions PHP</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{  path('linkphp_index') }}">Liens sources externes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{  path('app_logout') }}">Déconnexion</a>
+    </li>#}
+{% endblock %}
+{% block titre %}Administration{% endblock %}
+{% block stitre %}<p class="lead">Administration des fonctions et des liens</p>{% endblock %}
+{% block contenu %}
+    {#
+    <a href="{{  path('listephp_index') }}">Liste des fonctions PHP</a><br>
+    <a href="{{  path('linkphp_index') }}">Liste des liens vers les ressources PHP</a><br>
+    #}
+{% endblock %}
+

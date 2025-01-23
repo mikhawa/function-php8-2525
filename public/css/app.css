@@ -3,6 +3,12 @@
     max-height: 300px;
     overflow-x: hidden;
 }
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #000;
+    background-color: #f5f5f5;
+}
 /*.cache:active{
     display:none;
 }
